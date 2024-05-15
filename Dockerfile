@@ -13,7 +13,7 @@ WORKDIR /app
 # Copy the current directory contents into the container
 COPY . /app
 
-# Install Python packages from requirements.txt
+# Install Python packages from requiements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the port the app runs on
