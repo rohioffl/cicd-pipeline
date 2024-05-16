@@ -9,10 +9,10 @@ application = Flask(__name__)
 application.secret_key = secret_key
 # MySQL Configuration
 
-db_host = 'localhost'
+db_host = 'jdbc:mysql://3.109.174.97:3306'
 db_user = 'username'
 db_password = 'password'
-db_name = 'databasename'
+db_name = 'dbname'
 
 def create_connection():
     return pymysql.connect(host=db_host, user=db_user, password=db_password, db=db_name)
