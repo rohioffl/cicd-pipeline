@@ -9,7 +9,7 @@ application = Flask(__name__)
 application.secret_key = secret_key
 # MySQL Configuration
 
-db_host = '3.109.174.97:3306'
+db_host = 'localhost'
 db_user = 'username'
 db_password = 'password'
 db_name = 'dbname'
