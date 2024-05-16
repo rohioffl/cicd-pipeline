@@ -12,7 +12,7 @@ application.secret_key = secret_key
 db_host = 'mysql-container'
 db_user = 'username'
 db_password = 'password'
-db_name = 'dbname'
+db_name = 'dbname'  
 
 def create_connection():
     return pymysql.connect(host=db_host, user=db_user, password=db_password, db=db_name)
