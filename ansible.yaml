@@ -1,0 +1,14 @@
+---
+- name: Deploy Kubernetes Deployment from local file
+  hosts: kube
+  tasks:
+    - name: apply deployment.yaml
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          src: /home/ubuntu/flask/k8s/deployment.yaml
+    - name: apply service.yaml
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          src: /home/ubuntu/flask/k8s/service.yaml

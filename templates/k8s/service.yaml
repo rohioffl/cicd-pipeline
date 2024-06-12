@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-LB-service
+spec:
+  selector:
+    app: flask-app
+  type: Loadbalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
