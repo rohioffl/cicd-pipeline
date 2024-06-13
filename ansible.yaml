@@ -49,14 +49,13 @@
         src: "{{ ingress_file }}"
         dest: "{{ dest_dir }}/"
 
-    - name: Deleting Kubernetes resources
-      kubernetes.core.k8s:
-        state: absent
-        src: "{{ dest_dir }}/{{ item }}"
-      with_items: "{{ resources }}"
-      ignore_errors: true  # Ignore errors to ensure idempotency
-      retries: 60
-      delay: 50
+#    - name: Deleting Kubernetes resources
+#      kubernetes.core.k8s:
+#        state: absent
+#        src: "{{ dest_dir }}/{{ item }}"
+#      with_items: "{{ resources }}"
+#      ignore_errors: true  # Ignore errors to ensure idempotency
+
     - name: Applying Kubernetes resources
       kubernetes.core.k8s:
         state: present
