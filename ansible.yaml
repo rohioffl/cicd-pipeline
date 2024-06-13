@@ -25,6 +25,7 @@
 
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
-        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
-        with_items:
-          - /home/ubuntu/res/*.yaml
+        state: present
+        definition: "{{ item }}"
+      with_fileglob:
+        - /home/ubuntu/res/*.yaml
