@@ -1,139 +1,107 @@
----
 - name: Deploy Kubernetes Resources
-  hosts: kubernetes.core
+  hosts: kube
   collections:
     - kubernetes.core
-
   tasks:
-    # Ensure the target directory exists  
-    - name: Create /home/ubuntu/res directory
-      ansible.builtin.file:
-        path: /home/ubuntu/res
-        state: directory
-        mode: '0755'
-
-    # Copy files from flask folder
-    - name: Copy files from flask folder to remote host
+    - name: Copy files from flask folder
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: /home/ubuntu/res/
       with_fileglob:
         - /home/ubuntu/flask/k8s/flask/*
 
-    # Copy files from mysql folder
-    - name: Copy files from mysql folder to remote host
+    - name: Copy files from mysql folder
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: /home/ubuntu/res/
       with_fileglob:
         - /home/ubuntu/flask/k8s/mysql/*
 
-    # Copy ingress.yaml to remote host
     - name: Copy ingress.yaml to remote host
       ansible.builtin.copy:
         src: /home/ubuntu/flask/k8s/ingress.yaml
         dest: /home/ubuntu/res/
 
-    # Delete existing resources
+
     - name: Deleting flask-config.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/flask-config.yaml"
-      ignore_errors: yes
 
     - name: Deleting flask-ns.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/flask-ns.yaml"
-      ignore_errors: yes
 
     - name: Deleting ingress.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/ingress.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-deploy.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-deploy.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-ns.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-ns.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-pvc.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-pvc.yaml"
-      ignore_errors: yes
 
     - name: Deleting flask-deployment.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/flask-deployment.yaml"
-      ignore_errors: yes
 
     - name: Deleting flask-service.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/flask-service.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-config.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-config.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-lb.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-lb.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-pv.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-pv.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-service.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-service.yaml"
-      ignore_errors: yes
 
     - name: Deleting mysql-secret.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/mysql-secret.yaml"
-      ignore_errors: yes
 
     - name: Deleting flask-secret.yaml
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/flask-secret.yaml"
-      ignore_errors: yes
-
-    # Apply new resources
-    - name: Apply flask-ns.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/flask-ns.yaml"
-
-    - name: Apply mysql-ns.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-ns.yaml"
 
     - name: Apply flask-config.yaml
       kubernetes.core.k8s:
         state: present
         src: "/home/ubuntu/res/flask-config.yaml"
+
+    - name: Apply flask-ns.yaml
+      kubernetes.core.k8s:
+        state: present
+        src: "/home/ubuntu/res/flask-ns.yaml"
 
     - name: Apply ingress.yaml
       kubernetes.core.k8s:
@@ -144,6 +112,11 @@
       kubernetes.core.k8s:
         state: present
         src: "/home/ubuntu/res/mysql-deploy.yaml"
+
+    - name: Apply mysql-ns.yaml
+      kubernetes.core.k8s:
+        state: present
+        src: "/home/ubuntu/res/mysql-ns.yaml"
 
     - name: Apply mysql-pvc.yaml
       kubernetes.core.k8s:
