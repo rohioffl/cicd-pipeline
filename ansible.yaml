@@ -8,20 +8,20 @@
     dest_dir: /home/ubuntu/res
     ingress_file: /home/ubuntu/flask/k8s/ingress.yaml
     resources:
-      - flask-config.yaml
       - flask-ns.yaml
-      - ingress.yaml
-      - mysql-deploy.yaml
       - mysql-ns.yaml
-      - mysql-pvc.yaml
-      - flask-deployment.yaml
-      - flask-service.yaml
-      - mysql-config.yaml
-      - mysql-lb.yaml
-      - mysql-pv.yaml
-      - mysql-service.yaml
-      - mysql-secret.yaml
       - flask-secret.yaml
+      - flask-config.yaml
+      - flask-deployment.yaml
+      - mysql-config.yaml
+      - mysql-secret.yaml
+      - mysql-pv.yaml
+      - mysql-pvc.yaml
+      - mysql-deploy.yaml
+      - mysql-service.yaml
+      - flask-service.yaml
+      - mysql-lb.yaml
+      - ingress.yaml
 
   tasks:
     - name: Create destination directory if it does not exist
