@@ -26,10 +26,10 @@
     - name: Delete Kubernetes resources
       kubernetes.core.k8s:
         state: absent
-        src: "/tmp/*.yaml"
+        src: /tmp/*.yaml
       register: delete_result
 
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
         state: present
-        src: "/tmp/*.yaml"
+        src: /tmp/*.yaml
