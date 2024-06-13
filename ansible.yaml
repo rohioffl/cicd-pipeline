@@ -26,17 +26,17 @@
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
         state: present
-        src: "{{ lookup('file', item) }}"
-      with_fileglob:
-        - /home/ubuntu/res/flask-config.yaml
-        - /home/ubuntu/res/flask-ns.yaml
-        - /home/ubuntu/res/ingress.yaml
-        - /home/ubuntu/res/mysql-config.yaml
-        - /home/ubuntu/res/mysql-lb.yaml
-        - /home/ubuntu/res/mysql-pv.yaml
-        - /home/ubuntu/res/mysql-service.yaml
-        - /home/ubuntu/res/flask-deployment.yaml
-        - /home/ubuntu/res/flask-service.yaml
-        - /home/ubuntu/res/mysql-deploy.yaml
-        - /home/ubuntu/res/mysql-ns.yaml
-        - /home/ubuntu/res/mysql-pvc.yaml
+        src: "/tmp/{{ item }}"
+      with_items:
+        - flask-config.yaml
+        - flask-ns.yaml
+        - ingress.yaml
+        - mysql-deploy.yaml
+        - mysql-ns.yaml
+        - mysql-pvc.yaml
+        - flask-deployment.yaml
+        - flask-service.yaml
+        - mysql-config.yaml
+        - mysql-lb.yaml
+        - mysql-pv.yaml
+        - mysql-service.yaml
