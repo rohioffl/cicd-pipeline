@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: flask-app-ingress
   namespace: default
-  annotations:
+  annotations:  
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
@@ -15,13 +15,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: c-ip
-                port:
-                  number: 80
-          - path: /flask
-            pathType: Prefix
-            backend:
-              service:
-                name: c-ip
+                name: flask-svc.flask.svc.cluster.local
                 port:
                   number: 80

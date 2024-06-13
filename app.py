@@ -1,18 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for , flash
+import os
+from flask import Flask, render_template, request, redirect, url_for, flash
 import pymysql
-import secrets
-secret_key = secrets.token_hex(16)
 
 application = Flask(__name__)
+application.secret_key = os.getenv('SECRET_KEY')
 
-
-application.secret_key = secret_key
 # MySQL Configuration
-
-db_host = 'mysql-container'
-db_user = 'username'
-db_password = 'password'
-db_name = 'dbname'  
+db_host = os.getenv('DB_HOST')
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_name = os.getenv('DB_NAME')
 
 def create_connection():
     return pymysql.connect(host=db_host, user=db_user, password=db_password, db=db_name)

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: flask-secret
+  namespace: flask
+type: Opaque
+data:  
+  DB_PASSWORD: a3ViZQ==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flask-config
+  namespace: flask
+data:
+  SECRET_KEY: "79bf55b3c699bef7f3aba71bd4065808"
+  DB_HOST: "mysql-svc.mysql-flask.svc.cluster.local:3306"  # MySQL Service DNS name
+  DB_USER: "rohit"  # MySQL username
+  DB_NAME: "dbs"  # MySQL database name

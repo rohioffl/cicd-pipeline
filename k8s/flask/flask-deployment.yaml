@@ -2,7 +2,7 @@
   kind: Deployment
   metadata:
     name: flask-app-dep
-    namespace: default
+    namespace: flask
     labels:
       app: flask-app
   spec:
@@ -20,3 +20,8 @@
           image: rohioffl/flask_app:latest
           ports:
           - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: flask-config
+            - secretRef:
+                name: flask-secret
