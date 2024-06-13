@@ -40,5 +40,5 @@
         - mysql-lb.yaml
         - mysql-pv.yaml
         - mysql-service.yaml
-        - mysql-secret.yaml
+        - mysql-secrets.yaml
         - flask-secret.yaml
