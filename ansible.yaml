@@ -1,6 +1,6 @@
 ---
 - name: Deploy Kubernetes Resources
-  hosts: kube1
+  hosts: kube
   become: yes
   collections:
     - kubernetes.core
