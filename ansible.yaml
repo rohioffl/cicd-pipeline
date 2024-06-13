@@ -4,47 +4,35 @@
   collections:
     - kubernetes.core
   tasks:
-    - name: Copy deployment.yaml to remote host
+    - name: Copy files from flask folder
       ansible.builtin.copy:
-        src: /home/ubuntu/flask/k8s/deployment.yaml
-        dest: /tmp/deployment.yaml
+        src: "{{ item }}"
+        dest: /tmp/
+      with_fileglob:
+        - /home/ubuntu/flask/k8s/flask/*
 
-    - name: Delete existing deployment
-      kubernetes.core.k8s:
-        state: absent
-        src: /tmp/deployment.yaml
-
-    - name: Apply new deployment
-      kubernetes.core.k8s:
-        state: present
-        src: /tmp/deployment.yaml
-
-    - name: Copy service.yaml to remote host
+    - name: Copy files from mysql folder
       ansible.builtin.copy:
-        src: /home/ubuntu/flask/k8s/service.yaml
-        dest: /tmp/service.yaml
-
-    - name: Delete existing service
-      kubernetes.core.k8s:
-        state: absent
-        src: /tmp/service.yaml
-
-    - name: Apply new service
-      kubernetes.core.k8s:
-        state: present
-        src: /tmp/service.yaml
+        src: "{{ item }}"
+        dest: /tmp/
+      with_fileglob:
+        - /home/ubuntu/flask/k8s/mysql/*
 
     - name: Copy ingress.yaml to remote host
       ansible.builtin.copy:
         src: /home/ubuntu/flask/k8s/ingress.yaml
-        dest: /tmp/ingress.yaml
+        dest: /tmp/
 
-    - name: Delete existing ingress
+    - name: Deleteing 
       kubernetes.core.k8s:
         state: absent
-        src: /tmp/ingress.yaml
+        src: "{{ item }}"
+      with_fileglob:
+        - /tmp/*.yaml
 
-    - name: Apply new ingress
+    - name: Applying 
       kubernetes.core.k8s:
         state: present
-        src: /tmp/ingress.yaml
+        src: "{{ item }}"
+      with_fileglob:
+        - /tmp/*.yaml
