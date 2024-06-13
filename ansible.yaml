@@ -1,17 +1,17 @@
 ---
-- name: Deploy Kubernetes Resources
+- name: Deploy and Manage Kubernetes Resources
   hosts: kube
   collections:
     - kubernetes.core
   tasks:
-    - name: Copy files from flask folder
+    - name: Copy files from flask folder to remote host
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: /tmp/
       with_fileglob:
         - /home/ubuntu/flask/k8s/flask/*
 
-    - name: Copy files from mysql folder
+    - name: Copy files from mysql folder to remote host
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: /tmp/
@@ -23,13 +23,15 @@
         src: /home/ubuntu/flask/k8s/ingress.yaml
         dest: /tmp/
 
-    - name: Delete Kubernetes resources
+    - name: Delete Kubernetes resources on remote host
       kubernetes.core.k8s:
         state: absent
-        src: "/tmp/*.yaml"
-      register: delete_result
+        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
+      with_fileglob:
+        - "/tmp/*.yaml"
 
-    - name: Apply Kubernetes resources
+    - name: Apply Kubernetes resources on remote host
       kubernetes.core.k8s:
-        state: present
-        src: /tmp/*.yaml
+        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
+      with_fileglob:
+        - "/tmp/*.yaml"
