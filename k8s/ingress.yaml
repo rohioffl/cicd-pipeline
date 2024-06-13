@@ -16,5 +16,6 @@ spec:
             backend:
               service:
                 name: "flask-svc"
+                namespace: "flask"
                 port:
                   number: 80
