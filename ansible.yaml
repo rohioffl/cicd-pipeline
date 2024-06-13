@@ -26,7 +26,7 @@
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
         state: present
-        src: "/tmp/{{ item }}"
+        src: "/home/ubuntu/res/{{ item }}"
       with_items:
         - flask-config.yaml
         - flask-ns.yaml
