@@ -1,5 +1,5 @@
 ---
-- name: Deploy Kubernetes Deployment from local file
+- name: Deploy Kubernetes Deployment and Service
   hosts: kube
   collections:
     - kubernetes.core
@@ -9,7 +9,12 @@
         src: /home/ubuntu/flask/k8s/deployment.yaml
         dest: /tmp/deployment.yaml
 
-    - name: Apply deployment.yaml
+    - name: Delete existing deployment
+      kubernetes.core.k8s:
+        state: absent
+        src: /tmp/deployment.yaml
+
+    - name: Apply new deployment
       kubernetes.core.k8s:
         state: present
         src: /tmp/deployment.yaml
@@ -19,7 +24,12 @@
         src: /home/ubuntu/flask/k8s/service.yaml
         dest: /tmp/service.yaml
 
-    - name: Apply service.yaml
+    - name: Delete existing service
+      kubernetes.core.k8s:
+        state: absent
+        src: /tmp/service.yaml
+
+    - name: Apply new service
       kubernetes.core.k8s:
         state: present
         src: /tmp/service.yaml
