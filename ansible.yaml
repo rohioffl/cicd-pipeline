@@ -25,6 +25,26 @@
 
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
+        state: absent
+        src: "/home/ubuntu/res/{{ item }}"
+      with_items:
+        - flask-config.yaml
+        - flask-ns.yaml
+        - ingress.yaml
+        - mysql-deploy.yaml
+        - mysql-ns.yaml
+        - mysql-pvc.yaml
+        - flask-deployment.yaml
+        - flask-service.yaml
+        - mysql-config.yaml
+        - mysql-lb.yaml
+        - mysql-pv.yaml
+        - mysql-service.yaml
+        - mysql-secret.yaml
+        - flask-secrets.yaml
+
+    - name: Deleting Kubernetes resources
+      kubernetes.core.k8s:
         state: present
         src: "/home/ubuntu/res/{{ item }}"
       with_items:
@@ -40,5 +60,5 @@
         - mysql-lb.yaml
         - mysql-pv.yaml
         - mysql-service.yaml
-        - mysql-secrets.yaml
-        - flask-secret.yaml
+        - mysql-secret.yaml
+        - flask-secrets.yaml
