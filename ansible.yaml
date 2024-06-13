@@ -1,5 +1,5 @@
 ---
-- name: Deploy Kubernetes Deployment and Service
+- name: Deploy Kubernetes Resources
   hosts: kube
   collections:
     - kubernetes.core
@@ -23,16 +23,18 @@
         src: /home/ubuntu/flask/k8s/ingress.yaml
         dest: /tmp/
 
-    - name: Deleteing 
+    - name: Delete Kubernetes resources
       kubernetes.core.k8s:
         state: absent
-        src: "{{ item }}"
-      with_fileglob:
-        - /tmp/*.yaml
+        src: "/tmp/*.yaml"
+      register: delete_result
 
-    - name: Applying 
+    - name: Wait for deletion to complete
+      async: 300
+      poll: 10
+      when: delete_result.changed
+
+    - name: Apply Kubernetes resources
       kubernetes.core.k8s:
         state: present
-        src: "{{ item }}"
-      with_fileglob:
-        - /tmp/*.yaml
+        src: /tmp/*.yaml
