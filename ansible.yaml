@@ -26,12 +26,32 @@
     - name: Delete Kubernetes resources on remote host
       kubernetes.core.k8s:
         state: absent
-        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
-      with_fileglob:
-        - "/tmp/*.yaml"
+        definition: "{{ lookup('template', item) | from_yaml }}"
+      with_items:
+        - "/tmp/flask-config.yaml"
+        - "/tmp/flask-deployment.yaml"
+        - "/tmp/mysql-config.yaml"
+        - "/tmp/mysql-deploy.yaml"
+        - "/tmp/mysql-lb.yaml"
+        - "/tmp/mysql-ns.yaml"
+        - "/tmp/mysql-pv.yaml"
+        - "/tmp/mysql-pvc.yaml"
+        - "/tmp/ingress.yaml"
+        - "/tmp/flask-service.yaml"
+        - "/tmp/mysql-service.yaml"
 
     - name: Apply Kubernetes resources on remote host
       kubernetes.core.k8s:
-        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
-      with_fileglob:
-        - "/tmp/*.yaml"
+        definition: "{{ lookup('template', item) | from_yaml }}"
+      with_items:
+        - "/tmp/flask-config.yaml"
+        - "/tmp/flask-deployment.yaml"
+        - "/tmp/mysql-config.yaml"
+        - "/tmp/mysql-deploy.yaml"
+        - "/tmp/mysql-lb.yaml"
+        - "/tmp/mysql-ns.yaml"
+        - "/tmp/mysql-pv.yaml"
+        - "/tmp/mysql-pvc.yaml"
+        - "/tmp/ingress.yaml"
+        - "/tmp/flask-service.yaml"
+        - "/tmp/mysql-service.yaml"
