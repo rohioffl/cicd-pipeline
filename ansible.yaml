@@ -7,24 +7,24 @@
     - name: Copy files from flask folder
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: /tmp/
+        dest: /home/ubuntu/res/
       with_fileglob:
         - /home/ubuntu/flask/k8s/flask/*
 
     - name: Copy files from mysql folder
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: /tmp/
+        dest: /home/ubuntu/res/
       with_fileglob:
         - /home/ubuntu/flask/k8s/mysql/*
 
     - name: Copy ingress.yaml to remote host
       ansible.builtin.copy:
         src: /home/ubuntu/flask/k8s/ingress.yaml
-        dest: /tmp/
+        dest: /home/ubuntu/res/
 
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
         definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
         with_fileglob:
-          - "/tmp/*.yaml"
+          - /home/ubuntu/res/*.yaml
