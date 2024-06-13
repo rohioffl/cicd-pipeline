@@ -16,14 +16,3 @@ data:
         email VARCHAR(100) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL
     );
-
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-secret
-  namespace: mysql-flask
-type: Opaque
-data:
-  MYSQL_ROOT_PASSWORD: cm9vdA==   # base64 encoded value for 'root'
-  MYSQL_PASSWORD: a3ViZQ==        # base64 encoded value for 'rohit'
