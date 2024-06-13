@@ -23,13 +23,8 @@
         src: /home/ubuntu/flask/k8s/ingress.yaml
         dest: /tmp/
 
-    - name: Delete Kubernetes resources
-      kubernetes.core.k8s:
-        state: absent
-        src: /tmp/*.yaml
-      register: delete_result
-
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
-        state: present
-        src: /tmp/*.yaml
+        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
+        with_fileglob:
+          - "/tmp/*.yaml"
