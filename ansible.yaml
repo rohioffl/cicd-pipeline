@@ -1,12 +1,11 @@
 ---
 - name: Deploy Kubernetes Resources
-  hosts: kube
-  become: yes
+  hosts: kubernetes.core
   collections:
     - kubernetes.core
 
   tasks:
-    # Ensure the target directory exists
+    # Ensure the target directory exists  
     - name: Create /home/ubuntu/res directory
       ansible.builtin.file:
         path: /home/ubuntu/res
