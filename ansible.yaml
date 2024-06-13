@@ -1,14 +1,25 @@
 ---
 - name: Deploy Kubernetes Deployment from local file
   hosts: kube
+  collections:
+    - kubernetes.core
   tasks:
-    - name: apply deployment.yaml
+    - name: Copy deployment.yaml to remote host
+      ansible.builtin.copy:
+        src: /home/ubuntu/flask/k8s/deployment.yaml
+        dest: /tmp/deployment.yaml
+
+    - name: Apply deployment.yaml
       kubernetes.core.k8s:
         state: present
-        definition:
-          src: /home/ubuntu/flask/k8s/deployment.yaml
-    - name: apply service.yaml
+        src: /tmp/deployment.yaml
+
+    - name: Copy service.yaml to remote host
+      ansible.builtin.copy:
+        src: /home/ubuntu/flask/k8s/service.yaml
+        dest: /tmp/service.yaml
+
+    - name: Apply service.yaml
       kubernetes.core.k8s:
         state: present
-        definition:
-          src: /home/ubuntu/flask/k8s/service.yaml
+        src: /tmp/service.yaml
