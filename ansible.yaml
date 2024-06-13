@@ -23,7 +23,7 @@
         src: /home/ubuntu/flask/k8s/ingress.yaml
         dest: /home/ubuntu/res/
 
-    - name: Apply Kubernetes resources
+    - name: Deleting Kubernetes resources
       kubernetes.core.k8s:
         state: absent
         src: "/home/ubuntu/res/{{ item }}"
@@ -41,9 +41,9 @@
         - mysql-pv.yaml
         - mysql-service.yaml
         - mysql-secret.yaml
-        - flask-secrets.yaml
+        - flask-secret.yaml
 
-    - name: Deleting Kubernetes resources
+    - name: Applying Kubernetes resources
       kubernetes.core.k8s:
         state: present
         src: "/home/ubuntu/res/{{ item }}"
@@ -61,4 +61,4 @@
         - mysql-pv.yaml
         - mysql-service.yaml
         - mysql-secret.yaml
-        - flask-secrets.yaml
+        - flask-secret.yaml
