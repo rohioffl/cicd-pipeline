@@ -33,3 +33,18 @@
       kubernetes.core.k8s:
         state: present
         src: /tmp/service.yaml
+
+    - name: Copy ingress.yaml to remote host
+      ansible.builtin.copy:
+        src: /home/ubuntu/flask/k8s/ingress.yaml
+        dest: /tmp/ingress.yaml
+
+    - name: Delete existing ingress
+      kubernetes.core.k8s:
+        state: absent
+        src: /tmp/ingress.yaml
+
+    - name: Apply new ingress
+      kubernetes.core.k8s:
+        state: present
+        src: /tmp/ingress.yaml

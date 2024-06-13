@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lbsvc
+  name: c-ip
   namespace: default
 spec:
   selector:
     app: flask-app
-  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 80
       targetPort: 5000
+  type: ClusterIP  
