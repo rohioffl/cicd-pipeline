@@ -1,3 +1,4 @@
+---
 - name: Deploy Kubernetes Resources
   hosts: kube
   collections:
@@ -22,143 +23,42 @@
         src: /home/ubuntu/flask/k8s/ingress.yaml
         dest: /home/ubuntu/res/
 
-
-    - name: Deleting flask-config.yaml
+    - name: Deleting Kubernetes resources
       kubernetes.core.k8s:
         state: absent
-        src: "/home/ubuntu/res/flask-config.yaml"
+        src: "/home/ubuntu/res/{{ item }}"
+      with_items:
+        - flask-config.yaml
+        - flask-ns.yaml
+        - ingress.yaml
+        - mysql-deploy.yaml
+        - mysql-ns.yaml
+        - mysql-pvc.yaml
+        - flask-deployment.yaml
+        - flask-service.yaml
+        - mysql-config.yaml
+        - mysql-lb.yaml
+        - mysql-pv.yaml
+        - mysql-service.yaml
+        - mysql-secret.yaml
+        - flask-secret.yaml
 
-    - name: Deleting flask-ns.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/flask-ns.yaml"
-
-    - name: Deleting ingress.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/ingress.yaml"
-
-    - name: Deleting mysql-deploy.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-deploy.yaml"
-
-    - name: Deleting mysql-ns.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-ns.yaml"
-
-    - name: Deleting mysql-pvc.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-pvc.yaml"
-
-    - name: Deleting flask-deployment.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/flask-deployment.yaml"
-
-    - name: Deleting flask-service.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/flask-service.yaml"
-
-    - name: Deleting mysql-config.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-config.yaml"
-
-    - name: Deleting mysql-lb.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-lb.yaml"
-
-    - name: Deleting mysql-pv.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-pv.yaml"
-
-    - name: Deleting mysql-service.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-service.yaml"
-
-    - name: Deleting mysql-secret.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/mysql-secret.yaml"
-
-    - name: Deleting flask-secret.yaml
-      kubernetes.core.k8s:
-        state: absent
-        src: "/home/ubuntu/res/flask-secret.yaml"
-
-    - name: Apply flask-config.yaml
+    - name: Applying Kubernetes resources
       kubernetes.core.k8s:
         state: present
-        src: "/home/ubuntu/res/flask-config.yaml"
-
-    - name: Apply flask-ns.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/flask-ns.yaml"
-
-    - name: Apply ingress.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/ingress.yaml"
-
-    - name: Apply mysql-deploy.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-deploy.yaml"
-
-    - name: Apply mysql-ns.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-ns.yaml"
-
-    - name: Apply mysql-pvc.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-pvc.yaml"
-
-    - name: Apply flask-deployment.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/flask-deployment.yaml"
-
-    - name: Apply flask-service.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/flask-service.yaml"
-
-    - name: Apply mysql-config.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-config.yaml"
-
-    - name: Apply mysql-lb.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-lb.yaml"
-
-    - name: Apply mysql-pv.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-pv.yaml"
-
-    - name: Apply mysql-service.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-service.yaml"
-
-    - name: Apply mysql-secret.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/mysql-secret.yaml"
-
-    - name: Apply flask-secret.yaml
-      kubernetes.core.k8s:
-        state: present
-        src: "/home/ubuntu/res/flask-secret.yaml"
+        src: "/home/ubuntu/res/{{ item }}"
+      with_items:
+        - flask-config.yaml
+        - flask-ns.yaml
+        - ingress.yaml
+        - mysql-deploy.yaml
+        - mysql-ns.yaml
+        - mysql-pvc.yaml
+        - flask-deployment.yaml
+        - flask-service.yaml
+        - mysql-config.yaml
+        - mysql-lb.yaml
+        - mysql-pv.yaml
+        - mysql-service.yaml
+        - mysql-secret.yaml
+        - flask-secret.yaml
