@@ -1,64 +1,63 @@
----
 - name: Deploy Kubernetes Resources
   hosts: kube
   collections:
     - kubernetes.core
+  vars:
+    src_dir_flask: /home/ubuntu/flask/k8s/flask
+    src_dir_mysql: /home/ubuntu/flask/k8s/mysql
+    dest_dir: /home/ubuntu/res
+    ingress_file: /home/ubuntu/flask/k8s/ingress.yaml
+    resources:
+      - flask-config.yaml
+      - flask-ns.yaml
+      - ingress.yaml
+      - mysql-deploy.yaml
+      - mysql-ns.yaml
+      - mysql-pvc.yaml
+      - flask-deployment.yaml
+      - flask-service.yaml
+      - mysql-config.yaml
+      - mysql-lb.yaml
+      - mysql-pv.yaml
+      - mysql-service.yaml
+      - mysql-secret.yaml
+      - flask-secret.yaml
+
   tasks:
+    - name: Create destination directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ dest_dir }}"
+        state: directory
+        mode: '0755'
+
     - name: Copy files from flask folder
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: /home/ubuntu/res/
+        dest: "{{ dest_dir }}/"
       with_fileglob:
-        - /home/ubuntu/flask/k8s/flask/*
+        - "{{ src_dir_flask }}/*"
 
     - name: Copy files from mysql folder
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: /home/ubuntu/res/
+        dest: "{{ dest_dir }}/"
       with_fileglob:
-        - /home/ubuntu/flask/k8s/mysql/*
+        - "{{ src_dir_mysql }}/*"
 
     - name: Copy ingress.yaml to remote host
       ansible.builtin.copy:
-        src: /home/ubuntu/flask/k8s/ingress.yaml
-        dest: /home/ubuntu/res/
+        src: "{{ ingress_file }}"
+        dest: "{{ dest_dir }}/"
 
     - name: Deleting Kubernetes resources
       kubernetes.core.k8s:
         state: absent
-        src: "/home/ubuntu/res/{{ item }}"
-      with_items:
-        - flask-config.yaml
-        - flask-ns.yaml
-        - ingress.yaml
-        - mysql-deploy.yaml
-        - mysql-ns.yaml
-        - mysql-pvc.yaml
-        - flask-deployment.yaml
-        - flask-service.yaml
-        - mysql-config.yaml
-        - mysql-lb.yaml
-        - mysql-pv.yaml
-        - mysql-service.yaml
-        - mysql-secret.yaml
-        - flask-secret.yaml
+        src: "{{ dest_dir }}/{{ item }}"
+      with_items: "{{ resources }}"
+      ignore_errors: true  # Ignore errors to ensure idempotency
 
     - name: Applying Kubernetes resources
       kubernetes.core.k8s:
         state: present
-        src: "/home/ubuntu/res/{{ item }}"
-      with_items:
-        - flask-config.yaml
-        - flask-ns.yaml
-        - ingress.yaml
-        - mysql-deploy.yaml
-        - mysql-ns.yaml
-        - mysql-pvc.yaml
-        - flask-deployment.yaml
-        - flask-service.yaml
-        - mysql-config.yaml
-        - mysql-lb.yaml
-        - mysql-pv.yaml
-        - mysql-service.yaml
-        - mysql-secret.yaml
-        - flask-secret.yaml
+        src: "{{ dest_dir }}/{{ item }}"
+      with_items: "{{ resources }}"
