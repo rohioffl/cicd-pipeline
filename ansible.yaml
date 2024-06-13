@@ -27,7 +27,7 @@
       kubernetes.core.k8s:
         state: present
         definition: "{{ lookup('file', item) }}"
-      with_items:
+      with_fileglob:
         - /home/ubuntu/res/flask-config.yaml
         - /home/ubuntu/res/flask-ns.yaml
         - /home/ubuntu/res/ingress.yaml
