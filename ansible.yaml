@@ -29,11 +29,6 @@
         src: "/tmp/*.yaml"
       register: delete_result
 
-    - name: Wait for deletion to complete
-      async: 300
-      poll: 10
-      when: delete_result.changed
-
     - name: Apply Kubernetes resources
       kubernetes.core.k8s:
         state: present
