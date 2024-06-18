@@ -6,10 +6,10 @@ application = Flask(__name__)
 application.secret_key = os.getenv('SECRET_KEY')
 
 # MySQL Configuration
-db_host = "mysql-svc.mysql-flask.svc.cluster.local"
-db_user = "rohit"
-db_password = "os.getenv('DB_PASSWORD')"
-db_name = "dbs"
+db_host = os.getenv('DB_HOST')
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_name = os.getenv('DB_NAME')
 
 def create_connection():
     return pymysql.connect(host=db_host, user=db_user, password=db_password, db=db_name)
