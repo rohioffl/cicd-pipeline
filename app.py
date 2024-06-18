@@ -84,4 +84,7 @@ def home():
     
 
 if __name__ == '__main__':
+
+    os.environ['FLASK_ENV'] = 'development'
+    
     application.run(debug=True)
