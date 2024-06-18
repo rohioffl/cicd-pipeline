@@ -18,20 +18,19 @@ spec:
       containers:
         - name: flask-app
           image: rohioffl/flask_app:latest
-          ports: 5000
+          ports:
+            - containerPort: 5000
           env:
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: flask-secret
-                key: DB_PASSWORD
-          - name: DB_PASSWORD
-            value: kube
-          - name: SECRET_KEY
-            value: 79bf55b3c699bef7f3aba71bd4065808
-          - name: DB_HOST
-            value: ab9f55279b76e44ce8d1f182cd1af14c-1798616262.ap-south-1.elb.amazonaws.com
-          - name: DB_USER
-            value: rohit
-          - name: DB_NAME
-            value: dbs
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flask-secret
+                  key: DB_PASSWORD
+            - name: SECRET_KEY
+              value: "79bf55b3c699bef7f3aba71bd4065808"
+            - name: DB_HOST
+              value: "ab9f55279b76e44ce8d1f182cd1af14c-1798616262.ap-south-1.elb.amazonaws.com"
+            - name: DB_USER
+              value: "rohit"
+            - name: DB_NAME
+              value: "dbs"
