@@ -22,27 +22,12 @@ spec:
             - containerPort: 5000
           env:
             - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: flask-secret
-                  key: DB_PASSWORD
+              value: kube
             - name: SECRET_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: flask-config
-                  key: SECRET_KEY
+              value: 79bf55b3c699bef7f3aba71bd4065808
             - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: flask-config
-                  key: DB_HOST
+              value: ab9f55279b76e44ce8d1f182cd1af14c-1798616262.ap-south-1.elb.amazonaws.com
             - name: DB_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: flask-config
-                  key: DB_USER
+              value: rohit
             - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: flask-config
-                  key: DB_NAME
+              value: dbs
