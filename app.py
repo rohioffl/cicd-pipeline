@@ -1,12 +1,10 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import pymysql
-from dotenv import load_dotenv
 
 application = Flask(__name__)
 application.secret_key = os.getenv('SECRET_KEY')
 
-load_dotenv()
 # MySQL Configuration
 db_host = os.getenv('DB_HOST')
 db_user = os.getenv('DB_USER')
