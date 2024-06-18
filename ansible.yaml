@@ -39,6 +39,10 @@
         src: "{{ dest_dir }}/{{ item }}"
       with_items: "{{ resources }}"
 
+    - name: Pause for a while before applying resources
+      pause:
+        seconds: 50
+
     - name: Applying Kubernetes resources
       kubernetes.core.k8s:
         state: present
