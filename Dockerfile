@@ -1,4 +1,4 @@
-# Stage 1: Base image
+    # Stage 1: Base image
 FROM python:3.9-slim
 
 # Install dependencies and setup Python environment
@@ -12,6 +12,7 @@ WORKDIR /app
 
 # Copy the current directory contents into the container
 COPY . /app
+COPY .env /app/.env
 
 # Install Python packages from requiements.txt
 RUN pip install --no-cache-dir -r requirements.txt
