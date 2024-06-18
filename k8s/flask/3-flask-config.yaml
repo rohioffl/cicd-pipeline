@@ -5,6 +5,6 @@ metadata:
   namespace: flask
 data:
   SECRET_KEY: "79bf55b3c699bef7f3aba71bd4065808"
-  DB_HOST: "ab9f55279b76e44ce8d1f182cd1af14c-1798616262.ap-south-1.elb.amazonaws.com:3306"  
+  DB_HOST: "https://ab9f55279b76e44ce8d1f182cd1af14c-1798616262.ap-south-1.elb.amazonaws.com:3306"  
   DB_USER: "rohit"  
   DB_NAME: "dbs"  
