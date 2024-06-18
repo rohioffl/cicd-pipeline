@@ -20,3 +20,29 @@ spec:
           image: rohioffl/flask_app:latest
           ports:
             - containerPort: 5000
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flask-secret
+                  key: DB_PASSWORD
+            - name: SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: SECRET_KEY
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: DB_HOST
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: DB_USER
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: DB_NAME

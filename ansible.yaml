@@ -8,6 +8,8 @@
     ingress_file: /home/ubuntu/flask/k8s/ingress.yaml
     resources:
       - 1-flask-ns.yaml
+      - 2-flask-secret.yaml
+      - 3-flask-config.yaml
       - 4-flask-deployment.yaml
       - 5-flask-service.yaml
       - ingress.yaml
