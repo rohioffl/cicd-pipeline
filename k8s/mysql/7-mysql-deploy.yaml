@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: mysql:8.0
+        image: mysql:latest
         ports:
         - containerPort: 3306
         env:
@@ -42,16 +42,12 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: mysql-data
-        - mountPath: /docker-entrypoint-initdb.d
-          name: schema-init
-          subPath: schema.sql
+        - name: mysql-initdb
+          mountPath: /docker-entrypoint-initdb.d
       volumes:
       - name: mysql-data
         persistentVolumeClaim:
-          claimName: mysql-pvc
-      - name: schema-init
+          claimName: mysql-pvc  
+      - name: mysql-initdb
         configMap:
-          name: schema-config
-          items:
-            - key: schema.sql
-              path: schema.sql
+          name: mysql-initdb-config

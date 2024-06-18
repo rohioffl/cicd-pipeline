@@ -1,12 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: schema-config
+  name: mysql-initdb-config
   namespace: mysql-flask
 data:
-  MYSQL_DATABASE: "dbs"
-  MYSQL_USER: "rohit"
-  schema.sql: |
+  init.sql: |
     CREATE DATABASE IF NOT EXISTS dbs;
     USE dbs;
 

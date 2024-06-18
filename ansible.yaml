@@ -8,19 +8,11 @@
     dest_dir: /home/ubuntu/res
     ingress_file: /home/ubuntu/flask/k8s/ingress.yaml
     resources:
-      - flask-ns.yaml
-      - mysql-ns.yaml
-      - flask-secret.yaml
-      - flask-config.yaml
-      - flask-deployment.yaml
-      - mysql-config.yaml
-      - mysql-secret.yaml
-      - mysql-pv.yaml
-      - mysql-pvc.yaml
-      - mysql-deploy.yaml
-      - mysql-service.yaml
-      - flask-service.yaml
-      - mysql-lb.yaml
+      - 1-flask-ns.yaml
+      - 2-flask-secret.yaml
+      - 3-flask-config.yaml
+      - 4-flask-deployment.yaml
+      - 5-flask-service.yaml
       - ingress.yaml
 
   tasks:
@@ -49,12 +41,11 @@
         src: "{{ ingress_file }}"
         dest: "{{ dest_dir }}/"
 
-#    - name: Deleting Kubernetes resources
-#      kubernetes.core.k8s:
-#        state: absent
-#        src: "{{ dest_dir }}/{{ item }}"
-#      with_items: "{{ resources }}"
-#      ignore_errors: true  # Ignore errors to ensure idempotency
+    - name: Applying Kubernetes resources
+      kubernetes.core.k8s:
+        state: absent
+        src: "{{ dest_dir }}/{{ item }}"
+      with_items: "{{ resources }}"
 
     - name: Applying Kubernetes resources
       kubernetes.core.k8s:
