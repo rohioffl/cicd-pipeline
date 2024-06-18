@@ -6,10 +6,10 @@ application = Flask(__name__)
 application.secret_key = os.getenv('SECRET_KEY')
 
 # MySQL Configuration
-db_host = "ab9f55279b76e44ce8d1f182cd1af14c-1798616262.ap-south-1.elb.amazonaws.com"
-db_user = "rohit"
-db_password = "kube"
-db_name = "dbs"
+db_host = os.getenv('DB_HOST')
+db_user = os.getenv('DB_USER')
+db_password = os.getenv('DB_PASSWORD')
+db_name = os.getenv('DB_NAME')
 
 def create_connection():
     return pymysql.connect(host=db_host, user=db_user, password=db_password, db=db_name)
