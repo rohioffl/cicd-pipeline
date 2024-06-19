@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy the current directory contents into the container
-COPY . .
+COPY . /app
 
 
 # Install Python packages from requirements.txt
