@@ -29,7 +29,7 @@ spec:
             - name: SECRET_KEY
               value: "79bf55b3c699bef7f3aba71bd4065808"
             - name: DB_HOST
-              value: "mysql-svc"
+              value: "aa377f1e91f264c2e973569d163663c3-1400154291.ap-south-1.elb.amazonaws.com"
             - name: DB_USER
               value: "rohit"
             - name: DB_NAME
