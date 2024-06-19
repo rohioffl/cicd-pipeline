@@ -3,15 +3,6 @@ CI/CD Pipeline Project
 CI Pipeline
 Table of Contents
 
-    Introduction
-    Features
-    Prerequisites
-    Installation
-    Usage
-    Testing
-    CI/CD Pipeline
-    Dockerization
-    Contributing
 
 Introduction
 
