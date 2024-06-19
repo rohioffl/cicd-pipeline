@@ -6,7 +6,7 @@ application = Flask(__name__)
 application.secret_key = os.getenv('SECRET_KEY')
 
 # MySQL Configuration
-db_host = os.getenv('DB_HOST')
+db_host = os.getenv('mysql-svc')
 db_user = os.getenv('DB_USER')
 db_password = os.getenv('DB_PASSWORD')
 db_name = os.getenv('DB_NAME')
