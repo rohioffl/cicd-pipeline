@@ -29,7 +29,7 @@ spec:
             - name: SECRET_KEY
               value: "79bf55b3c699bef7f3aba71bd4065808"
             - name: DB_HOST
-              value: "a317dc6747552490d8e5e3e2d5f2cb44-302194685.ap-south-1.elb.amazonaws.com"
+              value: "mysql-svc.mysql-flask.svc.cluster.local"
             - name: DB_USER
               value: "rohit"
             - name: DB_NAME
