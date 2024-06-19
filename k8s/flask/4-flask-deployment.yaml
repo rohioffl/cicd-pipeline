@@ -27,10 +27,22 @@ spec:
                   name: flask-secret
                   key: DB_PASSWORD
             - name: SECRET_KEY
-              value: "79bf55b3c699bef7f3aba71bd4065808"
+              valueFrom:
+                secretKeyRef:
+                  name: flask-secret
+                  key: SECRET_KEY
             - name: DB_HOST
-              value: "mysql-svc.mysql-flask.svc.cluster.local"
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: DB_HOST
             - name: DB_USER
-              value: "rohit"
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: DB_USER
             - name: DB_NAME
-              value: "dbs"
+              valueFrom:
+                configMapKeyRef:
+                  name: flask-config
+                  key: DB_NAME
