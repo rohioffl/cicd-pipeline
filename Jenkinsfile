@@ -1,6 +1,6 @@
 node {
     
-    stage('Git Checkout') 
+    stage('Git Checkin') 
     {
         git 'https://github.com/rohioffl/cicd-pipeline.git'
     }
