@@ -46,7 +46,7 @@ node {
     {
         sshagent(['docker-instance']) 
         {
-            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.167 ansible-playbook /home/ubuntu/flask/deploy.yaml'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.167 ansible-playbook /home/ubuntu/flask/ansible.yaml'
 
         }    
             
