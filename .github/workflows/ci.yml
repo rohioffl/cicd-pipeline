@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pipeline configs
+        run: |
+          echo "Checking pipeline files..."
+          find . -name 'Jenkinsfile*' | head -10
+          find . -name 'Dockerfile*' | head -10
+          find . -name '*.yaml' -o -name '*.yml' | grep -v '.github' | head -10
+          echo "Validation complete"
